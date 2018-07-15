@@ -1,19 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Car List</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+	Car List
+{% endblock title %}
+
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid sticky-top">
+  <div class="container">
+    <h1 class="display-4">Which Car Will You Take Home?</h1>
+    <p class="lead">Offering the best prices in town!</p>
+  </div>
+</div>
+<br>
+<br>
+<div class="container">
+	<div class="row">
+
 	{% for car in cars %}
-		<a href="{{car.get_absolute_url}}">
-			<h1>
-				{{car.make}} - {{car.model}}
-				<small>
-					{{car.year}}
-				</small>
-			</h1>
-		</a>
+		<div class="card border shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;">
+			<a href="{{car.get_absolute_url}}">
+			  <img class="card-img-top" src="{{car.car_img.url}}" alt="Card image cap">
+			</a>
+		  	<div class="card-body">
+		    	<h5 class="card-title">{{car.make}} - {{car.model}}</h5>
+		    	<p class="card-text">{{car.year}}</p>
+		  	</div>
+		</div>
 		<hr>
 	{% endfor %}
-</body>
-</html>
+	</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add a New Car{% endblock title %}
+
+{% block content %}
+<br>
+<div class="jumbotron jumbotron-fluid sticky-top">
+  <div class="container">
+    <h1 class="display-4">Update the car specs for the {{car.make}}</h1>
+    <p class="lead"><h1>
+			Previous specs include:
+			<small>
+				{{car.make}} - {{car.model}} - {{car.year}}
+			</small>
+		</h1></p>
+  </div>
+</div>
+
+<div class="container col-2">
+	<img src="{{car.car_img.url}}">
+	<form action="{% url 'car-update' car_id=car.id %}" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{form|crispy}}
+		<input type="Submit" name="Update Car">
+	</form>
+</div>
+<br>
+<a href="{% url 'car-list' %}"><button type="button" class="btn btn-danger btn-lg btn-block">Nevermind, I changed my mind. No updates.</button></a>
+{% endblock content %}
